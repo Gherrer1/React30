@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-console.log('whats good');
-
 function Key(props) {
   return (
     <div data-key={props.letter.charCodeAt(0)} className="key">
@@ -16,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    window.addEventListener('keydown', function(e) {
+    window.addEventListener('keydown', (e) => {
     });
   }
 
