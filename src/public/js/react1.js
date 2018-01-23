@@ -13,15 +13,24 @@ function Key(props) {
 }
 
 class App extends React.Component {
-    render() {
-      return (
+  constructor(props) {
+    super(props);
+
+    window.addEventListener('keydown', function(e) {
+    });
+  }
+
+  render() {
+    return (
+      <div>
         <div className="keys">{
           this.props.keys.map(keyObj => (
             <Key key={keyObj.letter} {...keyObj} />
           ))
         }</div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 let keys = [
@@ -36,11 +45,24 @@ let keys = [
   { letter: 'l'.toUpperCase(), sound: 'tink' }
 ];
 
-ReactDOM.render(<App keys={keys} />, document.querySelector('.keys'));
+ReactDOM.render(<App keys={keys} />, document.querySelector('#app'));
 
 /*
   - convert letter to ascii key
   1) what does data-key do?
   2) webpack - multiple entries and multiple outputs
   3) whats kbd
+*/
+
+/*
+<div id="sounds">{
+  this.props.keys.map(keyObj => (
+    <audio
+      key={keyObj.letter}
+      autoPlay={true}
+      onEnded={() => console.log('ended looool')}
+      data-key={keyObj.letter.charCodeAt(0)}
+      src={`sounds/${keyObj.sound}.wav`}></audio>
+  ))
+}</div>
 */
