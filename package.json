@@ -1,0 +1,23 @@
+{
+  "name": "react30",
+  "version": "1.0.0",
+  "description": "Taking the Javascript30 challenge, but completing it with React to sharpen my skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gherrer1/React30.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gherrer1/React30/issues"
+  },
+  "homepage": "https://github.com/Gherrer1/React30#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  }
+}

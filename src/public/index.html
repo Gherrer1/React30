@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React30!</title>
+  </head>
+  <body>
+    <div>Hey there</div>
+    <ul id="30"></ul>
+
+    <script>
+      (function() {
+        let list = document.getElementById('30');
+
+        for(let i = 1; i <= 30; i++) {
+          let liTag = document.createElement('li');
+          let aTag = document.createElement('a');
+          liTag.appendChild(aTag);
+          let hrefAttr = document.createAttribute('href');
+          hrefAttr.value = `/file${i}.html`;
+          aTag.setAttributeNode(hrefAttr);
+          aTag.appendChild(document.createTextNode(i));
+          list.appendChild(liTag);
+        }
+      })();
+    </script>
+  </body>
+</html>
