@@ -24,6 +24,10 @@ class App extends React.Component {
       this.setState({
         [e.key.toUpperCase()]: true
       });
+
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);;
+      audio.currentTime = 0;
+      audio.play();
     });
   }
 
@@ -41,6 +45,18 @@ class App extends React.Component {
             <Key key={keyObj.letter} {...keyObj} playing={this.state[keyObj.letter]} transitionFinished={this.animationFinished} />
           ))
         }</div>
+
+        <div id="sounds">
+          <audio data-key="65" src="sounds/clap.wav"></audio>
+          <audio data-key="83" src="sounds/hihat.wav"></audio>
+          <audio data-key="68" src="sounds/kick.wav"></audio>
+          <audio data-key="70" src="sounds/openhat.wav"></audio>
+          <audio data-key="71" src="sounds/boom.wav"></audio>
+          <audio data-key="72" src="sounds/ride.wav"></audio>
+          <audio data-key="74" src="sounds/snare.wav"></audio>
+          <audio data-key="75" src="sounds/tom.wav"></audio>
+          <audio data-key="76" src="sounds/tink.wav"></audio>
+        </div>
       </div>
     );
   }
