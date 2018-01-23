@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 
 function Key(props) {
   return (
-    <div data-key={props.letter.charCodeAt(0)} className="key">
+    <div
+      data-key={props.letter.charCodeAt(0)}
+      className={`key ${props.playing ? 'playing' : ''}`}
+      onTransitionEnd={() => props.transitionFinished(props.letter)}>
       <kbd>{props.letter}</kbd>
       <span className="sound">{props.sound}</span>
     </div>
@@ -14,7 +17,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {};
+    this.animationFinished = this.animationFinished.bind(this);
+
     window.addEventListener('keydown', (e) => {
+      this.setState({
+        [e.key.toUpperCase()]: true
+      });
+    });
+  }
+
+  animationFinished(letter) {
+    this.setState({
+      [letter]: false
     });
   }
 
@@ -23,7 +38,7 @@ class App extends React.Component {
       <div>
         <div className="keys">{
           this.props.keys.map(keyObj => (
-            <Key key={keyObj.letter} {...keyObj} />
+            <Key key={keyObj.letter} {...keyObj} playing={this.state[keyObj.letter]} transitionFinished={this.animationFinished} />
           ))
         }</div>
       </div>
