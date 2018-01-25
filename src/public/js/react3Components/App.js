@@ -8,18 +8,41 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      padding: '10px',
-      filter: 'blur(10px)',
-      background: '#ffc600'
+      padding: 10,
+      blur: 10
+      // padding: '10px',
+      // filter: 'blur(10px)',
+      // background: '#ffc600'
     };
+
+    this.updateSpacing = this.updateSpacing.bind(this);
+    this.updateBlur = this.updateBlur.bind(this);
+  }
+
+  updateSpacing(value) {
+    this.setState({
+      padding: value
+    });
+  }
+
+  updateBlur(value) {
+    this.setState({
+      blur: value
+    });
   }
 
   render() {
+    const style = {
+      filter: `blur(${this.state.blur}px)`,
+      padding: `${this.state.padding}px`,
+      background: '#ffc600'
+    };
+
     return (
       <div>
-        <Slider label="Spacing" min="10" max="200" defaultValue="10" />
-        <Slider label="Blur" min="0" max="25" defaultValue="10" />
-        <img src={this.props.imageSrc} style={this.state}/>
+        <Slider label="Spacing" min="10" max="200" value={this.state.padding} onChange={this.updateSpacing} />
+        <Slider label="Blur" min="0" max="25" value={this.state.blur} onChange={this.updateBlur} />
+        <img src={this.props.imageSrc} style={style}/>
       </div>
     );
   }
