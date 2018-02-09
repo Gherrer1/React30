@@ -16,7 +16,7 @@ class CustomForm extends React.Component {
     e.preventDefault();
     const typed = this.state.typed;
     this.setState({ typed: '' });
-    // this.props.handleSubmit(typed);
+    this.props.handleSubmit(typed);
   }
 
   onTyped(e) {

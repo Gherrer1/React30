@@ -13,6 +13,15 @@ class App extends React.Component {
     };
 
     this.setSecondsLeft = this.setSecondsLeft.bind(this);
+    this.handleCustomTypedInput = this.handleCustomTypedInput.bind(this);
+  }
+
+  handleCustomTypedInput(input) {
+    const minutes = Number(input);
+    if(typeof minutes === 'number' && isFinite(minutes)) {
+      let secondsLeft = Math.floor(minutes * 60);
+      this.setSecondsLeft(secondsLeft);
+    }
   }
 
   setSecondsLeft(secs) {
@@ -45,6 +54,7 @@ class App extends React.Component {
       <div className="timer">
         <TimerControls
           onTimerBtnClick={this.setSecondsLeft}
+          onCustomFormSubmit={this.handleCustomTypedInput}
         />
         <Display {...displayProps} />
       </div>

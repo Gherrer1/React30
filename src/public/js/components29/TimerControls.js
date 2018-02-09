@@ -21,7 +21,7 @@ export default function TimerControls(props) {
           setSecondsLeft={props.onTimerBtnClick}
         />
       ))}
-      <CustomForm />
+      <CustomForm handleSubmit={props.onCustomFormSubmit}/>
     </div>
   );
 }
