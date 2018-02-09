@@ -1,5 +1,6 @@
 import React from 'react';
 import TimerButton from './TimerButton';
+import CustomForm from './CustomForm';
 
 const staticButtonData = [
   { secs: 20, text: '20 Secs' },
@@ -20,6 +21,7 @@ export default function TimerControls(props) {
           setSecondsLeft={props.onTimerBtnClick}
         />
       ))}
+      <CustomForm />
     </div>
   );
 }
