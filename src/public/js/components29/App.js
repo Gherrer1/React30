@@ -17,6 +17,10 @@ class App extends React.Component {
 
   setSecondsLeft(secs) {
     const _this = this;
+    if(this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
     this.setState({
       sealBroken: true,
       secondsLeft: secs,
