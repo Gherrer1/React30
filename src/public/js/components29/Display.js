@@ -4,7 +4,7 @@ function Display(props) {
   return (
     <div className="display">
       <h1 className="display__time-left">
-        {props.secondsLeft ? Display.convertSecsToCountdownStr(props.secondsLeft) : ''}
+        {props.sealBroken ? Display.convertSecsToCountdownStr(props.secondsLeft) : ''}
       </h1>
       <p className="display__end-time">{props.meetBackTime ? `Meet back at ${props.meetBackTime}` : ''}</p>
     </div>

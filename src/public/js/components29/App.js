@@ -7,6 +7,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      sealBroken: false,
       secondsLeft: null,
       meetBackTime: null
     };
@@ -15,20 +16,33 @@ class App extends React.Component {
   }
 
   setSecondsLeft(secs) {
-    // console.log(secs);
+    const _this = this;
     this.setState({
+      sealBroken: true,
       secondsLeft: secs,
       meetBackTime: App.getMeetBackTimeStr(secs)
+    }, () => {
+      _this.interval = setInterval(() => _this.setState(prev => ({ secondsLeft: prev.secondsLeft - 1 }), () => {
+        if(_this.state.secondsLeft === 0) {
+          clearInterval(_this.interval);
+          _this.interval = null;
+        }
+      }), 1000);
     });
   }
 
   render() {
+    const displayProps = {
+      sealBroken: this.state.sealBroken,
+      secondsLeft: this.state.sealBroken ? this.state.secondsLeft : '',
+      meetBackTime: this.state.sealBroken ? this.state.meetBackTime : ''
+    };
     return (
       <div className="timer">
         <TimerControls
           onTimerBtnClick={this.setSecondsLeft}
         />
-        <Display secondsLeft={this.state.secondsLeft || ''} meetBackTime={this.state.meetBackTime || ''} />
+        <Display {...displayProps} />
       </div>
     );
   }
