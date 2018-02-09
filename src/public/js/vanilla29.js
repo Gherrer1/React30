@@ -1,34 +1,49 @@
 (function main() {
+  let interval;
   const timeLeftDisplay = document.querySelector('.display__time-left');
   const timeEndDisplay = document.querySelector('.display__end-time');
-  console.log(timeEndDisplay);
-  let interval;
 
+  // custom form
+  const customForm = document.querySelector('#custom');
+  customForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let minutesInput = e.target.children[0];
+    let minutes = Number(minutesInput.value);
+    if(typeof minutes === 'number' && isFinite(minutes)) {
+      let secondsLeft = Math.floor(minutes * 60);
+      startCountdown(secondsLeft);
+    }
+    minutesInput.value = '';
+  });
+
+  // ...or timer buttons
   const timerButtons = document.querySelectorAll('.timer__button');
   timerButtons.forEach(el => {
-    el.addEventListener('click', function(e) {
-      if(interval) {
+    el.addEventListener('click', (e) => startCountdown(e.target.dataset.time));
+  });
+
+  // meat of the app
+  function startCountdown(secondsLeft) {
+    if(interval) {
+      clearInterval(interval);
+      interval = null;
+    }
+    let meetBackAtDate = getDateXSecondsFromNow(secondsLeft);
+    let meetBackAtStr = 'Meet at ' + convertDateToHoursMinsSecondsStr(meetBackAtDate);
+    timeEndDisplay.innerHTML = meetBackAtStr;
+    timeLeftDisplay.innerHTML = secondsToMinsSecondsStr(secondsLeft);
+    interval = setInterval(() => {
+      secondsLeft--;
+      timeLeftDisplay.innerHTML = secondsToMinsSecondsStr(secondsLeft);
+      if(secondsLeft === 0) {
         clearInterval(interval);
         interval = null;
       }
-      let secondsLeft = e.target.dataset.time;
-      // only once do we need to set the meet-back-at display
-      let meetBackAtDate = getDateXSecondsFromNow(secondsLeft);
-      let meetBackAtStr = 'Meet at ' + convertDateToHoursMinsSecondsStr(meetBackAtDate);
-      timeEndDisplay.innerHTML = meetBackAtStr;
-      timeLeftDisplay.innerHTML = secondsToMinsSecondsStr(secondsLeft);
-      interval = setInterval(() => {
-        secondsLeft--;
-        timeLeftDisplay.innerHTML = secondsToMinsSecondsStr(secondsLeft);
-        if(secondsLeft === 0) {
-          clearInterval(interval);
-          interval = null;
-        }
-      }, 1000);
-    });
-  });
+    }, 1000);
+  }
 })();
 
+// thank you, helper functions
 function convertDateToHoursMinsSecondsStr(date) {
   let hours = date.getHours().toString().padStart(2, '0');
   let mins = date.getMinutes().toString().padStart(2, '0');
