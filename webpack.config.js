@@ -1,10 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/public/js/react3.js',
+  devtool: 'source-map',
+  entry: './src/public/js/react29.js',
   output: {
     path: path.resolve(__dirname, 'src/public/js'),
-    filename: 'bundle3.js'
+    filename: 'bundle29.js'
   },
   module: {
     rules: [
